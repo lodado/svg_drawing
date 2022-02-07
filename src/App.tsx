@@ -1,42 +1,16 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import CanvasPage from 'src/javascripts/components/Drawing';
 
+/*
+  확장성을 고려 한 Route 처리
+*/
 export default function App() {
   return (
     <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/main">main</Link>
-            </li>
-          </ul>
-        </nav>
-
-        <Routes>
-          <Route path="/about" element={<Users />} />
-          <Route path="/main" element={<About />} />
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<CanvasPage />} />
+      </Routes>
     </Router>
   );
-}
-
-function Home() {
-  return <h2>Home</h2>;
-}
-
-function About() {
-  return <h2>About</h2>;
-}
-
-function Users() {
-  return <h2>Users</h2>;
 }

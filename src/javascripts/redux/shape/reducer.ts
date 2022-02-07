@@ -1,21 +1,21 @@
-import { TEST } from './action';
+import { PIXEL_SIZE } from './action';
 
 export interface ShapeActionType {
-  type: TEST;
-  payload?: never;
+  type: PIXEL_SIZE;
+  payload?: { pixelSize: number };
 }
 
 const initState = {
-  value: 0,
+  pixelSize: 0,
 };
 
 export default function shapeReducer(state = initState, action: ShapeActionType) {
   const { type, payload } = action;
-  const { value } = state;
+  // const { pixelSize } = state;
 
   switch (type) {
-    case TEST:
-      return { ...state };
+    case PIXEL_SIZE:
+      return { ...state, pixelSize: payload.pixelSize };
     default:
       return state;
   }

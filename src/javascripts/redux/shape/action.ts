@@ -1,7 +1,7 @@
 /* constants */
-export const TEST = 'TEST';
+export const PIXEL_SIZE = 'PIXEL_SIZE';
 
 /* actions */
-export function exfunction() {
-  return { action: TEST };
+export function setPixelSize(pixelSize: number) {
+  return { type: PIXEL_SIZE, payload: { pixelSize } };
 }

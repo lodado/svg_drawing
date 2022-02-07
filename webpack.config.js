@@ -6,8 +6,11 @@ const tsConfigPath = path.resolve(__dirname, './tsconfig.json');
 
 module.exports = {
   entry: './src/index.tsx',
+
   mode: 'development',
+  target: 'web', // only for develomplent
   devtool: 'inline-source-map',
+
   devServer: {
     host: '0.0.0.0',
     port: '3000',
@@ -15,11 +18,10 @@ module.exports = {
     open: true,
     historyApiFallback: true,
   },
-  
+
   output: {
     path: path.join(__dirname, 'bundle'),
     clean: true,
-    publicPath: '/',
     filename: '[name].[chunkhash].js',
   },
 
@@ -56,6 +58,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
+      cache: false,
     }),
   ],
   resolve: {
