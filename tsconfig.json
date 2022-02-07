@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "jsx": "react",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "rootDir": "./",
+    "outDir": "bundle",
+    "allowJs": true,
+    "sourceMap": true,
+    "baseUrl": "./",
+    "paths": {
+      "@Recoil/*": ["src/javascripts/recoil/*"],
+      "@Page/*": ["src/javascripts/page/*"],
+      "@Global/*": ["src/javascripts/global/*"],
+      "@Hook/*": ["src/javascripts/hook/*"]
+    }
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules"]
+}
