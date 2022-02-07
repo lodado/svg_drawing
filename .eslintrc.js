@@ -30,6 +30,8 @@ module.exports = {
       },
     ],
     'object-curly-newline': 'off',
+    'default-param-last': 'off',
+    '@typescript-eslint/default-param-last': 'off',
   },
   globals: {
     JSX: true,

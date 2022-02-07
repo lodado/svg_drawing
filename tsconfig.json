@@ -11,10 +11,10 @@
     "sourceMap": true,
     "baseUrl": "./",
     "paths": {
-      "@Recoil/*": ["src/javascripts/recoil/*"],
-      "@Page/*": ["src/javascripts/page/*"],
+      "@Redux/*": ["src/javascripts/redux/*"],
+      "@Pages/*": ["src/javascripts/components/pages/*"],
       "@Global/*": ["src/javascripts/global/*"],
-      "@Hook/*": ["src/javascripts/hook/*"]
+      "@Hook/*": ["src/javascripts/hooks/*"]
     }
   },
   "include": ["./src/**/*"],
