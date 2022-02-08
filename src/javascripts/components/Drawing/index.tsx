@@ -1,14 +1,14 @@
 import React from 'react';
-import ButtonList from './ButtonList';
-import Canvas from './Canvas';
-import PixelRangeBar from './PixelRangeBar';
+import ButtonList from './ButtonList/ButtonList';
+import Canvas from './Canvas/Canvas';
+import SelectOptionBar from './SelectOptionBar';
 
-export default function CanvasPage() {
+export default function CanvasPage(): JSX.Element {
   return (
     <div>
       <ButtonList />
-      <PixelRangeBar />
       <Canvas />
+      <SelectOptionBar />
     </div>
   );
 }

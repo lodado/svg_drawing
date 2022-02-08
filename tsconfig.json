@@ -12,7 +12,7 @@
     "baseUrl": "./",
     "paths": {
       "@Redux/*": ["src/javascripts/redux/*"],
-      "@Pages/*": ["src/javascripts/components/pages/*"],
+      "@Component/*": ["src/javascripts/components/*"],
       "@Global/*": ["src/javascripts/global/*"],
       "@Hook/*": ["src/javascripts/hooks/*"]
     }

@@ -3,30 +3,37 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { RootStoreType } from '@Redux/index';
 import { setPixelSize } from '@Redux/shape/action';
+import { THROTTLE_CYCLE, MIN_PIXEL_BORDER, MAX_PIXEL_BORDER } from '@Global/constant';
 
-export default function PixelRangeBar() {
-  const inputRef = useRef(null);
+export default function PixelRangeBar(): JSX.Element {
   const [throttle, setThrottle] = useState(false);
   const { pixelSize } = useSelector((state: RootStoreType) => state.shapeReducer);
   const disPatch = useDispatch();
+  const inputRef = useRef(null);
 
   const handleInputValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!throttle) setThrottle(true);
+
     setTimeout(() => {
       if (throttle) return;
 
-      setThrottle(true);
       const { target } = event;
       const { value } = target;
-
       disPatch(setPixelSize(Number(value)));
       setThrottle(false);
-    }, 150);
+    }, THROTTLE_CYCLE);
   };
 
   return (
     <div>
       {pixelSize}
-      <input ref={inputRef} onChange={handleInputValue} type="range" min="5" max="50" />
+      <input
+        ref={inputRef}
+        onChange={handleInputValue}
+        type="range"
+        min={MIN_PIXEL_BORDER}
+        max={MAX_PIXEL_BORDER}
+      />
     </div>
   );
 }
