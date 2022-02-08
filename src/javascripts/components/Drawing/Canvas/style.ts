@@ -1,19 +1,18 @@
 import styled from 'styled-components';
-import { GreyBackgroundShadow } from '@Global/mixin';
 
 const Container = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 
-  height: 80vh;
+  height: 73vh;
   width: 95vw;
 
   justify-content: space-evenly;
   align-items: center;
   margin: 1vh 2vw 0 2vw;
-
-  ${GreyBackgroundShadow};
+  border: 0.02rem solid var(--ShallowGrey, rgba(0, 0, 0, 0.45));
+  z-index: 10;
 `;
 
 export default Container;

@@ -11,6 +11,7 @@
     "sourceMap": true,
     "baseUrl": "./",
     "paths": {
+      "@Image/*": ["src/images/*"],
       "@Redux/*": ["src/javascripts/redux/*"],
       "@Component/*": ["src/javascripts/components/*"],
       "@Global/*": ["src/javascripts/global/*"],

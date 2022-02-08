@@ -1,9 +1,15 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootStoreType } from '@Redux/index';
 import { setPixelSize } from '@Redux/shape/action';
-import { THROTTLE_CYCLE, MIN_PIXEL_BORDER, MAX_PIXEL_BORDER } from '@Global/constant';
+import {
+  THROTTLE_CYCLE,
+  MIN_PIXEL_BORDER,
+  MAX_PIXEL_BORDER,
+  DEFAULT_PIXEL_VAULE,
+} from '@Global/constant';
+import { PixelBarContainer, PixelBarStyledDiv } from './style';
 
 export default function PixelRangeBar(): JSX.Element {
   const [throttle, setThrottle] = useState(false);
@@ -24,16 +30,23 @@ export default function PixelRangeBar(): JSX.Element {
     }, THROTTLE_CYCLE);
   };
 
+  const pixelText = ` ${pixelSize}px`.slice(-4);
+
   return (
-    <div>
-      {pixelSize}
-      <input
-        ref={inputRef}
-        onChange={handleInputValue}
-        type="range"
-        min={MIN_PIXEL_BORDER}
-        max={MAX_PIXEL_BORDER}
-      />
-    </div>
+    <PixelBarContainer>
+      {`선 두께 : ${pixelText}`}
+      <PixelBarStyledDiv>
+        <span>5px</span>
+        <input
+          ref={inputRef}
+          onChange={handleInputValue}
+          type="range"
+          min={MIN_PIXEL_BORDER}
+          max={MAX_PIXEL_BORDER}
+          defaultValue={DEFAULT_PIXEL_VAULE}
+        />
+        <span>50px</span>
+      </PixelBarStyledDiv>
+    </PixelBarContainer>
   );
 }
