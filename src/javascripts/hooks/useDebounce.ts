@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DEBOUNCE_CYCLE } from '@Global/constant';
 
 interface DebounceType<T> {

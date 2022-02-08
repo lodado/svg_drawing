@@ -13,7 +13,7 @@ const Container = styled.div`
   margin: 2vh 2vw 0 2vw;
 `;
 
-export const StyledCanvas = styled.canvas`
+export const WrapPaperDiv = styled.div`
   border: 0.02rem solid var(--ShallowGrey, rgba(0, 0, 0, 0.45));
 `;
 
