@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { RootStoreType } from '@Redux/index';
 import { setPixelSize } from '@Redux/shape/action';
 import {

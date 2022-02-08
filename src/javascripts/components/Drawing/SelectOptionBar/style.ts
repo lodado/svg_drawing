@@ -36,6 +36,22 @@ export const ColDiv = styled.div`
   }
 `;
 
+export const ColCenterDiv = styled.div`
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ColorDiv = styled.div<{ pixelColor: string }>`
+  width: 50%;
+  height: 1rem;
+
+  margin-bottom: 0.5rem;
+
+  background-color: ${({ pixelColor }) => pixelColor};
+`;
+
 export const PixelBarStyledDiv = styled.div`
   display: inline-flex;
   flex-direction: row;
