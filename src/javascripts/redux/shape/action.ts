@@ -2,7 +2,9 @@
 export const PIXEL_SIZE = 'PIXEL_SIZE';
 export const PIXEL_COLOR = 'PIXEL_COLOR';
 export const PIXEL_MODAL = 'PIXEL_MODAL';
+
 export const CANVAS_TAG = 'CANVAS_TAG';
+export const CANVAS_ZOOM = 'CANVAS_ZOOM';
 
 /* actions */
 export function setPixelSize(pixelSize: number) {
@@ -17,5 +19,9 @@ export function setPixelModalState(modalState: boolean) {
 }
 
 export function setCanvasTag(canvasTag) {
-  return { type: PIXEL_MODAL, payload: { canvasTag } };
+  return { type: CANVAS_TAG, payload: { canvasTag } };
+}
+
+export function setCanvasZoomPercent(zoomPercent: number) {
+  return { type: CANVAS_ZOOM, payload: { zoomPercent } };
 }

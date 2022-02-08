@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootStoreType } from '@Redux/index';
 import { setCanvasTag } from '@Redux/shape/action';
 import useDebounce from '@Hook/useDebounce';
-import { DEBOUNCE_CYCLE } from '@Global/constant';
 
 import Container, { StyledCanvas } from './style';
 
@@ -13,7 +12,9 @@ export default function Canvas(): JSX.Element {
   const [isDraw, setDraw] = useState(false);
   const [ctx, setCtx] = useState(undefined);
 
-  const { pixelSize, pixelColor } = useSelector((state: RootStoreType) => state.shapeReducer);
+  const { zoomPercent, pixelSize, pixelColor } = useSelector(
+    (state: RootStoreType) => state.shapeReducer,
+  );
   const debouncePixelSize = useDebounce({ value: pixelSize });
   const debouncePixelColor = useDebounce({ value: pixelColor });
 
@@ -25,31 +26,15 @@ export default function Canvas(): JSX.Element {
     canvas.width = rect.width;
     canvas.height = rect.height;
 
-    let resizeEventId = 0;
-
-    const resizeCanvasEvent = () => {
-      if (resizeEventId > 0) {
-        clearTimeout(resizeEventId);
-      }
-
-      const resizeEvent = () => {
-        const newRect = canvas.parentNode.getBoundingClientRect();
-        canvas.style.width = newRect.width;
-        canvas.style.height = newRect.height;
-        resizeEventId = 0;
-      };
-
-      resizeEventId = Number(setTimeout(resizeEvent, DEBOUNCE_CYCLE));
-    };
-
     disPatch(setCanvasTag(canvas));
-    window.addEventListener('resize', resizeCanvasEvent);
-    resizeCanvasEvent();
-
-    return () => {
-      window.removeEventListener('resize', resizeCanvasEvent);
-    };
   }, []);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const newRect = canvas.parentNode.getBoundingClientRect();
+    canvas.style.width = newRect.width * Math.floor(zoomPercent / 100);
+    canvas.style.height = newRect.height * Math.floor(zoomPercent / 100);
+  }, [zoomPercent]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
