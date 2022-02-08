@@ -7,8 +7,9 @@ import SelectOptionBar from './SelectOptionBar';
 export default function CanvasPage(): JSX.Element {
   return (
     <div>
-      <ButtonList />
       <Canvas />
+      <ButtonList />
+
       <SelectOptionBar />
     </div>
   );

@@ -10,9 +10,11 @@ const Container = styled.div`
 
   justify-content: space-evenly;
   align-items: center;
-  margin: 1vh 2vw 0 2vw;
+  margin: 2vh 2vw 0 2vw;
+`;
+
+export const StyledCanvas = styled.canvas`
   border: 0.02rem solid var(--ShallowGrey, rgba(0, 0, 0, 0.45));
-  z-index: 10;
 `;
 
 export default Container;

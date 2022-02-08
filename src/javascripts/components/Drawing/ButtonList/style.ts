@@ -3,6 +3,8 @@ import { hoverMenuBar } from '@Global/mixin';
 
 const Container = styled.div`
   display: flex;
+  position: fixed;
+
   flex-direction: row;
   flex-wrap: wrap;
 
@@ -11,7 +13,7 @@ const Container = styled.div`
 
   justify-content: space-evenly;
   align-items: center;
-  margin: 1vh 8vw 4vh 8vw;
+  margin: 1vh 8vw 2vh 8vw;
 
   ${hoverMenuBar};
 `;

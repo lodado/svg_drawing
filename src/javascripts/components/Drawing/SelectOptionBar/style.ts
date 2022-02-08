@@ -3,7 +3,7 @@ import { hoverMenuBar } from '@Global/mixin';
 
 const Container = styled.div`
   display: inline-flex;
-  position: absolute;
+  position: fixed;
 
   width: 95vw;
   height: 10vh;

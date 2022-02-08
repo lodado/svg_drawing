@@ -33,7 +33,7 @@ export default function PixelRangeBar(): JSX.Element {
 
   return (
     <PixelBarContainer>
-      {`선 두께 : ${pixelText}`}
+      <span>{`선 두께 : ${pixelText}`}</span>
       <PixelBarStyledDiv>
         <span>5px</span>
         <input
