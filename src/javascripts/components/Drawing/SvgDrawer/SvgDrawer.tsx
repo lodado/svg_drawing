@@ -1,7 +1,7 @@
 /* eslint-disable implicit-arrow-linebreak */
-import React, { useCallback, useMemo, useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
+import { useSelector } from 'react-redux';
 
-import { useDispatch, useSelector } from 'react-redux';
 import { RootStoreType } from '@Redux/index';
 import useShape from '@Hook/useShape';
 import { RAPHAEL_HEIGHT, RAPHAEL_WIDTH } from '@Global/constant';
@@ -85,7 +85,7 @@ const DataList = ({ data, zoomPercent }): JSX.Element[] =>
 
         return '';
       }),
-    [zoomPercent, data],
+    [zoomPercent, data.length],
   );
 
 export default function SvgDrawer(): JSX.Element {
@@ -99,7 +99,6 @@ export default function SvgDrawer(): JSX.Element {
   } = useShape();
 
   const { data, zoomPercent } = useSelector((state: RootStoreType) => state.shapeReducer);
-  const disPatch = useDispatch();
 
   const [paperWidth, paperHeight] = useMemo(
     () => [RAPHAEL_WIDTH * (zoomPercent / 100), RAPHAEL_HEIGHT * (zoomPercent / 100)],

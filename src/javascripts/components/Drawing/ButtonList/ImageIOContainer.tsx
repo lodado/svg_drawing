@@ -4,8 +4,8 @@ import { ButtonContainer } from './style';
 export default function ImageIOContainer(): JSX.Element {
   return (
     <ButtonContainer>
-      <button type="button">undo</button>
-      <button type="button">redo</button>
+      <button type="button">save</button>
+      <button type="button">load</button>
     </ButtonContainer>
   );
 }

@@ -7,6 +7,9 @@ export const SHAPE_TAG = 'SHAPE_TAG';
 export const SHAPE_ZOOM = 'SHAPE_ZOOM';
 export const SHAPE_DATA = 'SHAPE_DATA';
 
+export const UNDO_DATA = 'UNDO_DATA';
+export const REDO_DATA = 'REDO_DATA';
+
 /* actions */
 export function setPixelSize(pixelSize: number) {
   return { type: PIXEL_SIZE, payload: { pixelSize } };
@@ -30,4 +33,12 @@ export function setShapeZoomPercent(zoomPercent: number) {
 
 export function setShapeData(data) {
   return { type: SHAPE_DATA, payload: { data } };
+}
+
+export function undoData() {
+  return { type: UNDO_DATA };
+}
+
+export function redoData() {
+  return { type: REDO_DATA };
 }

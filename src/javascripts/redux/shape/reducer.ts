@@ -1,6 +1,17 @@
-import { DEFAULT_PIXEL_VAULE } from '@Global/constant';
+import { DEFAULT_PIXEL_VAULE, UNDO_LIMIT } from '@Global/constant';
 import { ShapeTagType } from '@Global/enum';
-import { PIXEL_SIZE, PIXEL_COLOR, PIXEL_MODAL, SHAPE_TAG, SHAPE_ZOOM, SHAPE_DATA } from './action';
+import {
+  PIXEL_SIZE,
+  PIXEL_COLOR,
+  PIXEL_MODAL,
+  SHAPE_TAG,
+  SHAPE_ZOOM,
+  SHAPE_DATA,
+  UNDO_DATA,
+  REDO_DATA,
+} from './action';
+
+type Shape = any;
 
 export interface ShapePayloadType {
   pixelSize: string;
@@ -8,11 +19,11 @@ export interface ShapePayloadType {
   modalState: boolean;
   shapeTag: ShapeTagType;
   zoomPercent: number;
-  data;
+  data: Shape;
 }
 
 export interface ShapeActionType {
-  type: PIXEL_SIZE | PIXEL_COLOR | PIXEL_MODAL | SHAPE_TAG | SHAPE_ZOOM | SHAPE_DATA;
+  type: PIXEL_SIZE | PIXEL_COLOR | PIXEL_MODAL | SHAPE_TAG | SHAPE_ZOOM | SHAPE_DATA | UNDO_DATA;
   payload?: ShapePayloadType;
 }
 
@@ -23,6 +34,7 @@ const initState = {
   shapeTag: 'line',
   zoomPercent: 100,
   data: [],
+  undoArray: [],
 };
 
 function getVaildShapeZoomPercent({ state, payload }) {
@@ -32,6 +44,29 @@ function getVaildShapeZoomPercent({ state, payload }) {
   else if (zoomPercent > 400) zoomPercent = 400;
 
   return { ...state, zoomPercent };
+}
+
+function setUndo({ state }) {
+  const { data, undoArray } = state;
+
+  if (data.length === 0) return state;
+
+  if (undoArray.length >= UNDO_LIMIT) undoArray.shift();
+  const newData = data;
+  const newUndoArray = undoArray.concat(newData.pop());
+
+  return { ...state, data: newData, undoArray: newUndoArray };
+}
+
+function setRedo({ state }) {
+  const { data, undoArray } = state;
+
+  if (undoArray.length === 0) return state;
+
+  const newUndoArray = undoArray;
+  const newData = data.concat(newUndoArray.pop());
+
+  return { ...state, data: newData, undoArray: newUndoArray };
 }
 
 export default function shapeReducer(state = initState, action: ShapeActionType) {
@@ -50,6 +85,11 @@ export default function shapeReducer(state = initState, action: ShapeActionType)
       return getVaildShapeZoomPercent({ state, payload });
     case SHAPE_DATA:
       return { ...state, data: state.data.concat(payload.data) };
+    case UNDO_DATA:
+      return setUndo({ state });
+    case REDO_DATA:
+      return setRedo({ state });
+
     default:
       return state;
   }
