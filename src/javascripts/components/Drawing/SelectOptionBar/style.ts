@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { hoverMenuBar } from '@Global/mixin';
+import { hoverMenuBar, setHoverCursor } from '@Global/mixin';
 
 const Container = styled.div`
   display: inline-flex;
@@ -41,6 +41,7 @@ export const ColCenterDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  ${setHoverCursor}
 `;
 
 export const ColorDiv = styled.div<{ pixelColor: string }>`
@@ -60,6 +61,10 @@ export const PixelBarStyledDiv = styled.div`
   & > span {
     margin: 0.2rem;
   }
+`;
+
+export const StyledInput = styled.input`
+  ${setHoverCursor}
 `;
 
 export default Container;

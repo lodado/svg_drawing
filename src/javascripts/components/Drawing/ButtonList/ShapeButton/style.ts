@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { setHoverCursor } from '@Global/mixin';
 
 interface Props {
   currentTagName: string;
@@ -6,8 +7,13 @@ interface Props {
 }
 
 const StyledDiv = styled.div<Props>`
+  display: flex;
+  justify-content: center;
+
   width: 3rem;
+  height: 3rem;
   text-align: center;
+  flex-direction: column;
   margin: 0 0.2rem 0 0.2rem;
 
   ${({ text, currentTagName }) => {
@@ -15,6 +21,8 @@ const StyledDiv = styled.div<Props>`
       ? 'font-size: 1.3rem;color:var(--MarineBlue, #0072ff); font-weight:bold;'
       : '';
   }}
+
+  ${setHoverCursor}
 `;
 
 export default StyledDiv;

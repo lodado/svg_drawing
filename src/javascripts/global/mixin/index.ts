@@ -17,3 +17,9 @@ export const hoverMenuBar = css`
     box-shadow: 0.1rem 0.1rem var(--DarkGrey, rgba(0, 0, 0, 0.25));
   }
 `;
+
+export const setHoverCursor = css`
+  &:hover {
+    cursor: pointer;
+  }
+`;

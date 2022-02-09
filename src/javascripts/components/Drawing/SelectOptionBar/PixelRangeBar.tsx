@@ -8,7 +8,7 @@ import {
   MAX_PIXEL_BORDER,
   DEFAULT_PIXEL_VAULE,
 } from '@Global/constant';
-import { PixelBarContainer, PixelBarStyledDiv } from './style';
+import { PixelBarContainer, PixelBarStyledDiv, StyledInput } from './style';
 
 export default function PixelRangeBar(): JSX.Element {
   const [throttle, setThrottle] = useState(false);
@@ -36,7 +36,7 @@ export default function PixelRangeBar(): JSX.Element {
       <span>{`선 두께 : ${pixelText}`}</span>
       <PixelBarStyledDiv>
         <span>5px</span>
-        <input
+        <StyledInput
           ref={inputRef}
           onChange={handleInputValue}
           type="range"

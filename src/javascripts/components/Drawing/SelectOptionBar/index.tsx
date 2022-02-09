@@ -40,8 +40,8 @@ export default function SelectOptionBar(): JSX.Element {
         <PhotoshopPicker
           onAccept={shutDownModalEvent}
           onCancel={shutDownModalEvent}
-          color={pixelColor}
           onChange={handleChangePicker}
+          color={pixelColor}
         />
       </Modal>
     </>

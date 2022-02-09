@@ -78,9 +78,14 @@ html {
     box-sizing: inherit;
   }
 
-:root {
+  :root {
   ${Color}
-}
+  }
+
+  button:hover {
+    cursor: pointer;
+  }
+
 `;
 
 export default GlobalStyle;
