@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Raphael, Paper, Set, Circle, Ellipse, Image, Rect, Text, Path, Line } from 'react-raphael';
 import { useSelector } from 'react-redux';
 import { RootStoreType } from '@Redux/index';
@@ -9,7 +9,9 @@ export default function useShape() {
   const [data, setData] = useState([]);
   const [pointer, setPointer] = useState([undefined, undefined]);
 
-  const { pixelSize, pixelColor } = useSelector((state: RootStoreType) => state.shapeReducer);
+  const { zoomPercent, pixelSize, pixelColor } = useSelector(
+    (state: RootStoreType) => state.shapeReducer,
+  );
   const debouncePixelSize = useDebounce({ value: pixelSize });
   const debouncePixelColor = useDebounce({ value: pixelColor });
 

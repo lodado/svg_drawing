@@ -1,3 +1,4 @@
+/* eslint-disable implicit-arrow-linebreak */
 import React, { useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Raphael, Paper, Set, Circle, Ellipse, Image, Rect, Text, Path, Line } from 'react-raphael';
@@ -7,6 +8,25 @@ import useShape from '@Hook/useShape';
 import { RAPHAEL_HEIGHT, RAPHAEL_WIDTH } from '@Global/constant';
 
 import Container, { WrapPaperDiv } from './style';
+
+const DataList = ({ data, zoomPercent }): JSX.Element[] =>
+  useMemo(
+    () =>
+      data.map((ele) => {
+        if (ele.element === Circle) {
+          return (
+            <ele.element
+              key={ele.key}
+              x={ele.x * (zoomPercent / 100)}
+              y={ele.y * (zoomPercent / 100)}
+              r={ele.r * (zoomPercent / 100)}
+              attr={ele.attr}
+            />
+          );
+        }
+      }),
+    [zoomPercent, data],
+  );
 
 export default function SvgDrawer(): JSX.Element {
   const svgRef = useRef(undefined);
@@ -31,17 +51,7 @@ export default function SvgDrawer(): JSX.Element {
         onMouseLeave={finishDrawing}
       >
         <Paper width={paperWidth} height={paperHeight} ref={svgRef}>
-          {data.map((ele) => {
-            return (
-              <ele.element
-                key={ele.key}
-                x={ele.x * (zoomPercent / 100)}
-                y={ele.y * (zoomPercent / 100)}
-                r={ele.r * (zoomPercent / 100)}
-                attr={ele.attr}
-              />
-            );
-          })}
+          <Set>{DataList({ data, zoomPercent })}</Set>
         </Paper>
       </WrapPaperDiv>
     </Container>
