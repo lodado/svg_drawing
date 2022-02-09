@@ -12,7 +12,7 @@ const Container = styled.div`
   left: 2vw;
   right: 2vw;
 
-  background-color: var(--menuColor, #fff);
+  background-color: var(--MenuColor, #fff);
   justify-content: space-around;
   align-items: center;
 

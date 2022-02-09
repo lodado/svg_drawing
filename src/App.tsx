@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import CanvasPage from '@Component/Drawing';
+import SvgDrawerPage from '@Component/Drawing';
 import rootStore from '@Redux/index';
 import GlobalStyle from '@Global/globalStyle';
 
@@ -13,7 +13,7 @@ export function AppRouter(): JSX.Element {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<CanvasPage />} />
+        <Route path="/" element={<SvgDrawerPage />} />
       </Routes>
     </Router>
   );

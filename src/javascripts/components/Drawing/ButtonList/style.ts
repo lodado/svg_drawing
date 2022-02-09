@@ -10,7 +10,7 @@ const Container = styled.div`
 
   min-height: 4.8rem;
   min-width: 80vw;
-  background-color: var(--menuColor, #fff);
+  background-color: var(--MenuColor, #fff);
 
   justify-content: space-evenly;
   align-items: center;

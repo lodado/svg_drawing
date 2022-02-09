@@ -1,11 +1,12 @@
 import { DEFAULT_PIXEL_VAULE } from '@Global/constant';
+import { ShapeTagType } from '@Global/enum';
 import { PIXEL_SIZE, PIXEL_COLOR, PIXEL_MODAL, SHAPE_TAG, SHAPE_ZOOM } from './action';
 
 export interface ShapePayloadType {
   pixelSize: string;
   pixelColor: string;
   modalState: boolean;
-  shapeTag: string;
+  shapeTag: ShapeTagType;
   zoomPercent: number;
 }
 
@@ -18,7 +19,7 @@ const initState = {
   pixelSize: DEFAULT_PIXEL_VAULE,
   pixelColor: '#000000',
   modalState: false,
-  shapeTag: 'circle',
+  shapeTag: 'line',
   zoomPercent: 100,
 };
 

@@ -7,7 +7,8 @@ const Body = css`
 const Color = css`
   --DarkGrey: rgba(0, 0, 0, 0.25);
   --ShallowGrey: rgba(0, 0, 0, 0.15);
-  --menuColor: #fff;
+  --MenuColor: #fff;
+  --MarineBlue: #0072ff;
 `;
 
 const GlobalStyle = createGlobalStyle`

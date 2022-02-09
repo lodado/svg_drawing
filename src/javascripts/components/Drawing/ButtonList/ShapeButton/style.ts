@@ -1,19 +1,20 @@
 import styled from 'styled-components';
-import { hoverMenuBar } from '@Global/mixin';
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+interface Props {
+  currentTagName: string;
+  text: string;
+}
 
-  min-height: 4.8rem;
-  min-width: 80vw;
+const StyledDiv = styled.div<Props>`
+  width: 3rem;
+  text-align: center;
+  margin: 0 0.2rem 0 0.2rem;
 
-  justify-content: space-evenly;
-  align-items: center;
-  margin: 1vh 8vw 0 8vw;
-
-  ${hoverMenuBar};
+  ${({ text, currentTagName }) => {
+    return text === currentTagName
+      ? 'font-size: 1.3rem;color:var(--MarineBlue, #0072ff); font-weight:bold;'
+      : '';
+  }}
 `;
 
-export default Container;
+export default StyledDiv;

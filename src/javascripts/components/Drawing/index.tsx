@@ -5,7 +5,7 @@ import SvgDrawer from './SvgDrawer/SvgDrawer';
 import SelectOptionBar from './SelectOptionBar';
 import ZoomBox from './ZoomBox/ButtonList';
 
-export default function CanvasPage(): JSX.Element {
+export default function SvgDrawerPage(): JSX.Element {
   return (
     <div>
       <ZoomBox />

@@ -1,8 +1,7 @@
 /* eslint-disable implicit-arrow-linebreak */
-import React, { useMemo, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Raphael, Paper, Set, Circle, Ellipse, Image, Rect, Text, Path, Line } from 'react-raphael';
+import React, { useMemo, useRef } from 'react';
 
+import { useDispatch, useSelector } from 'react-redux';
 import { RootStoreType } from '@Redux/index';
 import useShape from '@Hook/useShape';
 import { RAPHAEL_HEIGHT, RAPHAEL_WIDTH } from '@Global/constant';
@@ -13,17 +12,34 @@ const DataList = ({ data, zoomPercent }): JSX.Element[] =>
   useMemo(
     () =>
       data.map((ele) => {
-        if (ele.element === Circle) {
+        if (ele.element === 'line') {
           return (
-            <ele.element
+            <line
               key={ele.key}
-              x={ele.x * (zoomPercent / 100)}
-              y={ele.y * (zoomPercent / 100)}
-              r={ele.r * (zoomPercent / 100)}
-              attr={ele.attr}
+              x1={ele.x1}
+              y1={ele.y1}
+              x2={ele.x2}
+              y2={ele.y2}
+              stroke={ele.stroke}
+              strokeWidth={ele.strokeWidth}
             />
           );
         }
+
+        if (ele.element === 'circle') {
+          return (
+            <circle
+              key={ele.key}
+              cx={ele.x * (zoomPercent / 100)}
+              cy={ele.y * (zoomPercent / 100)}
+              r={ele.r * (zoomPercent / 100)}
+              stroke={ele.stroke}
+              strokeWidth={ele.strokeWidth}
+              fillOpacity="0"
+            />
+          );
+        }
+        return '';
       }),
     [zoomPercent, data],
   );
@@ -50,9 +66,9 @@ export default function SvgDrawer(): JSX.Element {
         onMouseUp={finishDrawing}
         onMouseLeave={finishDrawing}
       >
-        <Paper width={paperWidth} height={paperHeight} ref={svgRef}>
-          <Set>{DataList({ data, zoomPercent })}</Set>
-        </Paper>
+        <svg width={paperWidth} height={paperHeight} ref={svgRef}>
+          {DataList({ data, zoomPercent })}
+        </svg>
       </WrapPaperDiv>
     </Container>
   );
