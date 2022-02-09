@@ -82,21 +82,6 @@ const DataList = ({ data, zoomPercent }): JSX.Element[] =>
             />
           );
         }
-
-        if (element === 'img') {
-          return (
-            <img
-              x="100"
-              y="200"
-              width={500}
-              height={500}
-              key={ele.key}
-              src={ele.src}
-              alt="userSVG"
-            />
-          );
-        }
-
         return '';
       }),
     [zoomPercent, data.length],
