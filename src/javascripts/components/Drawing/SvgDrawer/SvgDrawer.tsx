@@ -37,7 +37,7 @@ const DataList = ({ data, zoomPercent }): JSX.Element[] =>
               r={ele.r * (zoomPercent / 100)}
               stroke={ele.stroke}
               strokeWidth={ele.strokeWidth}
-              fillOpacity="0"
+              fill="None"
             />
           );
         }
@@ -52,7 +52,7 @@ const DataList = ({ data, zoomPercent }): JSX.Element[] =>
               height={ele.height}
               stroke={ele.stroke}
               strokeWidth={ele.strokeWidth}
-              fillOpacity="0"
+              fill="None"
             />
           );
         }
@@ -67,7 +67,18 @@ const DataList = ({ data, zoomPercent }): JSX.Element[] =>
               ry={ele.ry}
               stroke={ele.stroke}
               strokeWidth={ele.strokeWidth}
-              fillOpacity="0"
+              fill="None"
+            />
+          );
+        }
+        if (element === 'curv') {
+          return (
+            <path
+              key={ele.key}
+              d={ele.d}
+              stroke={ele.stroke}
+              strokeWidth={ele.strokeWidth}
+              fill="None"
             />
           );
         }

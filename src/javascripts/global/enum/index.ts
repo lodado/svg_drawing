@@ -1,5 +1,6 @@
 export const SHAPE_TAG_OBJECT = {
   line: 'line',
+  curv: 'curv',
   circle: 'circle',
   rect: 'rect',
   ellipse: 'ellipse',

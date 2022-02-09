@@ -20,6 +20,9 @@ function getAttr({
     strokeWidth: debouncePixelSize,
   };
 
+  const [Cx1, Cy1] = [startX, offsetY];
+  const [Cx2, Cy2] = [offsetX, startY];
+
   switch (shapeTag) {
     case 'line':
       return {
@@ -53,6 +56,12 @@ function getAttr({
         cy: (offsetY + startY) / 2,
         rx: Math.abs(offsetX - startX) / 2,
         ry: Math.abs(offsetY - startY) / 2,
+      };
+
+    case 'curv':
+      return {
+        ...obj,
+        d: `M${startX},${startY}, C${Cx1},${Cy1} ${Cx2},${Cy2} ${offsetX},${offsetY}`,
       };
 
     default:
