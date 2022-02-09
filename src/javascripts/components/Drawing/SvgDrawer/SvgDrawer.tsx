@@ -96,10 +96,9 @@ export default function SvgDrawer(): JSX.Element {
     startDrawingByTouch,
     finishDrawingByTouch,
     moveDrawingByTouch,
-    data,
   } = useShape();
 
-  const { zoomPercent } = useSelector((state: RootStoreType) => state.shapeReducer);
+  const { data, zoomPercent } = useSelector((state: RootStoreType) => state.shapeReducer);
   const disPatch = useDispatch();
 
   const [paperWidth, paperHeight] = useMemo(

@@ -5,11 +5,13 @@ export const PIXEL_MODAL = 'PIXEL_MODAL';
 
 export const SHAPE_TAG = 'SHAPE_TAG';
 export const SHAPE_ZOOM = 'SHAPE_ZOOM';
+export const SHAPE_DATA = 'SHAPE_DATA';
 
 /* actions */
 export function setPixelSize(pixelSize: number) {
   return { type: PIXEL_SIZE, payload: { pixelSize } };
 }
+
 export function setPixelColor(pixelColor: string) {
   return { type: PIXEL_COLOR, payload: { pixelColor } };
 }
@@ -24,4 +26,8 @@ export function setShapeTag(shapeTag: string) {
 
 export function setShapeZoomPercent(zoomPercent: number) {
   return { type: SHAPE_ZOOM, payload: { zoomPercent } };
+}
+
+export function setShapeData(data) {
+  return { type: SHAPE_DATA, payload: { data } };
 }

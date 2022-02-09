@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootStoreType } from '@Redux/index';
-
+import { setShapeData } from '@Redux/shape/action';
 import useDebounce from './useDebounce';
 
 function getAttr({
@@ -70,13 +70,14 @@ function getAttr({
 }
 
 export default function useShape() {
-  const [data, setData] = useState([]);
   const [pointer, setPointer] = useState([undefined, undefined]);
   const [endPointer, setEndPointer] = useState([undefined, undefined]);
 
   const { shapeTag, zoomPercent, pixelSize, pixelColor } = useSelector(
     (state: RootStoreType) => state.shapeReducer,
   );
+  const dispatch = useDispatch();
+
   const debouncePixelSize = useDebounce({ value: pixelSize });
   const debouncePixelColor = useDebounce({ value: pixelColor });
 
@@ -125,8 +126,7 @@ export default function useShape() {
       debouncePixelColor,
       debouncePixelSize,
     });
-
-    setData(data.concat(attr));
+    dispatch(setShapeData(attr));
     setPointer([undefined, undefined]);
   };
 
@@ -153,7 +153,7 @@ export default function useShape() {
       debouncePixelSize,
     });
 
-    setData(data.concat(attr));
+    dispatch(setShapeData(attr));
     setPointer([undefined, undefined]);
     setEndPointer([undefined, undefined]);
   };
@@ -164,6 +164,5 @@ export default function useShape() {
     startDrawingByTouch,
     moveDrawingByTouch,
     finishDrawingByTouch,
-    data,
   };
 }

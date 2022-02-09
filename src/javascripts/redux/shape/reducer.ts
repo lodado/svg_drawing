@@ -1,6 +1,6 @@
 import { DEFAULT_PIXEL_VAULE } from '@Global/constant';
 import { ShapeTagType } from '@Global/enum';
-import { PIXEL_SIZE, PIXEL_COLOR, PIXEL_MODAL, SHAPE_TAG, SHAPE_ZOOM } from './action';
+import { PIXEL_SIZE, PIXEL_COLOR, PIXEL_MODAL, SHAPE_TAG, SHAPE_ZOOM, SHAPE_DATA } from './action';
 
 export interface ShapePayloadType {
   pixelSize: string;
@@ -8,10 +8,11 @@ export interface ShapePayloadType {
   modalState: boolean;
   shapeTag: ShapeTagType;
   zoomPercent: number;
+  data;
 }
 
 export interface ShapeActionType {
-  type: PIXEL_SIZE | PIXEL_COLOR | PIXEL_MODAL | SHAPE_TAG | SHAPE_ZOOM;
+  type: PIXEL_SIZE | PIXEL_COLOR | PIXEL_MODAL | SHAPE_TAG | SHAPE_ZOOM | SHAPE_DATA;
   payload?: ShapePayloadType;
 }
 
@@ -21,6 +22,7 @@ const initState = {
   modalState: false,
   shapeTag: 'line',
   zoomPercent: 100,
+  data: [],
 };
 
 function getVaildShapeZoomPercent({ state, payload }) {
@@ -46,6 +48,8 @@ export default function shapeReducer(state = initState, action: ShapeActionType)
       return { ...state, shapeTag: payload.shapeTag };
     case SHAPE_ZOOM:
       return getVaildShapeZoomPercent({ state, payload });
+    case SHAPE_DATA:
+      return { ...state, data: state.data.concat(payload.data) };
     default:
       return state;
   }
