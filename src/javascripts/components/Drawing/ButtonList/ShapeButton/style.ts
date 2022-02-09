@@ -15,14 +15,14 @@ const StyledDiv = styled.div<Props>`
   text-align: center;
   flex-direction: column;
   margin: 0 0.2rem 0 0.2rem;
+  font-size: 1.2rem;
 
   ${({ text, currentTagName }) => {
     return text === currentTagName
-      ? 'font-size: 1.3rem;color:var(--MarineBlue, #0072ff); font-weight:bold;'
+      ? 'font-size: 1.5rem;color:var(--MarineBlue, #0072ff); font-weight:bold;'
       : '';
   }}
-
-  ${setHoverCursor}
+  ${setHoverCursor};
 `;
 
 export default StyledDiv;

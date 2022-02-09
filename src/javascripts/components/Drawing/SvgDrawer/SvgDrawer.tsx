@@ -46,12 +46,16 @@ const DataList = ({ data, zoomPercent }): JSX.Element[] =>
 
 export default function SvgDrawer(): JSX.Element {
   const svgRef = useRef(undefined);
-  const { startDrawing, finishDrawing, data } = useShape();
+  const {
+    startDrawing,
+    finishDrawing,
+    startDrawingByTouch,
+    finishDrawingByTouch,
+    moveDrawingByTouch,
+    data,
+  } = useShape();
 
-  const { zoomPercent, pixelSize, pixelColor } = useSelector(
-    (state: RootStoreType) => state.shapeReducer,
-  );
-
+  const { zoomPercent } = useSelector((state: RootStoreType) => state.shapeReducer);
   const disPatch = useDispatch();
 
   const [paperWidth, paperHeight] = useMemo(
@@ -65,6 +69,9 @@ export default function SvgDrawer(): JSX.Element {
         onMouseDown={startDrawing}
         onMouseUp={finishDrawing}
         onMouseLeave={finishDrawing}
+        onTouchStart={startDrawingByTouch}
+        onTouchMove={moveDrawingByTouch}
+        onTouchEnd={finishDrawingByTouch}
       >
         <svg width={paperWidth} height={paperHeight} ref={svgRef}>
           {DataList({ data, zoomPercent })}

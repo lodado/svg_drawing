@@ -5,14 +5,14 @@ import { Container, Content, Overlay } from './style';
 interface Props {
   isOpen: boolean;
   onClose: () => void;
-  zIndex: number;
+  zIndex?: number;
   children: ReactNode;
   className?: string;
 }
 
 const root = document.getElementById('portal');
 
-const Modal = ({ isOpen, onClose, zIndex = 100, children, className }: Props): JSX.Element => {
+const Modal = ({ isOpen, onClose, zIndex, children, className }: Props): JSX.Element => {
   return createPortal(
     <Container visible={isOpen}>
       <Overlay onClick={onClose} zIndex={zIndex} />
@@ -22,6 +22,10 @@ const Modal = ({ isOpen, onClose, zIndex = 100, children, className }: Props): J
     </Container>,
     root,
   );
+};
+
+Modal.defaultProps = {
+  zIndex: 100,
 };
 
 export default Modal;

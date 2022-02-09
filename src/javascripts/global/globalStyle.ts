@@ -11,11 +11,12 @@ const Color = css`
   --MarineBlue: #0072ff;
 `;
 
-const GlobalStyle = createGlobalStyle`
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
+
+const GlobalStyle = createGlobalStyle`
 @font-face {
     font-family: 'Pretendard-Light';
     src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Light.woff')
@@ -80,6 +81,7 @@ html {
 
   :root {
   ${Color}
+  
   }
 
   button:hover {
