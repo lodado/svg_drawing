@@ -14,6 +14,7 @@ const Container = styled.div`
 `;
 
 export const WrapPaperDiv = styled.div`
+  background-color: var(--white, #fff);
   border: 0.02rem solid var(--ShallowGrey, rgba(0, 0, 0, 0.45));
 `;
 

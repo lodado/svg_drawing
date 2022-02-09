@@ -32,7 +32,7 @@ export default function ImageIOContainer(): JSX.Element {
     fileInput.addEventListener('change', readInputFile);
   };
 
-  const fileupload = () => {
+  const fileDownload = () => {
     const dataURL = document.querySelector('#svgDrawer').outerHTML;
     const svgBlob = new Blob([dataURL], { type: 'image/svg+xml;charset=utf-8' });
     const svgUrl = URL.createObjectURL(svgBlob);
@@ -48,7 +48,7 @@ export default function ImageIOContainer(): JSX.Element {
 
   return (
     <ButtonContainer>
-      <button onClick={fileupload} type="button">
+      <button onClick={fileDownload} type="button">
         save
       </button>
       <button onClick={fileUpload} type="button">

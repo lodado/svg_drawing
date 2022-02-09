@@ -8,7 +8,7 @@ import { RAPHAEL_HEIGHT, RAPHAEL_WIDTH } from '@Global/constant';
 
 import Container, { WrapPaperDiv } from './style';
 
-const DataList = ({ data, zoomPercent }): JSX.Element[] =>
+const DataList = ({ data, zoomPercent, paperWidth, paperHeight }): JSX.Element[] =>
   useMemo(
     () =>
       data.map((ele) => {
@@ -18,10 +18,10 @@ const DataList = ({ data, zoomPercent }): JSX.Element[] =>
           return (
             <line
               key={ele.key}
-              x1={ele.x1}
-              y1={ele.y1}
-              x2={ele.x2}
-              y2={ele.y2}
+              x1={ele.x1 * paperWidth}
+              y1={ele.y1 * paperHeight}
+              x2={ele.x2 * paperWidth}
+              y2={ele.y2 * paperHeight}
               stroke={ele.stroke}
               strokeWidth={ele.strokeWidth}
             />
@@ -32,8 +32,8 @@ const DataList = ({ data, zoomPercent }): JSX.Element[] =>
           return (
             <circle
               key={ele.key}
-              cx={ele.x * (zoomPercent / 100)}
-              cy={ele.y * (zoomPercent / 100)}
+              cx={ele.x * paperWidth}
+              cy={ele.y * paperHeight}
               r={ele.r * (zoomPercent / 100)}
               stroke={ele.stroke}
               strokeWidth={ele.strokeWidth}
@@ -46,10 +46,10 @@ const DataList = ({ data, zoomPercent }): JSX.Element[] =>
           return (
             <rect
               key={ele.key}
-              x={ele.x}
-              y={ele.y}
-              width={ele.width}
-              height={ele.height}
+              x={ele.x * paperWidth}
+              y={ele.y * paperHeight}
+              width={ele.width * paperWidth}
+              height={ele.height * paperHeight}
               stroke={ele.stroke}
               strokeWidth={ele.strokeWidth}
               fill="None"
@@ -61,10 +61,10 @@ const DataList = ({ data, zoomPercent }): JSX.Element[] =>
           return (
             <ellipse
               key={ele.key}
-              cx={ele.cx}
-              cy={ele.cy}
-              rx={ele.rx}
-              ry={ele.ry}
+              cx={ele.cx * paperWidth}
+              cy={ele.cy * paperHeight}
+              rx={ele.rx * paperWidth}
+              ry={ele.ry * paperHeight}
               stroke={ele.stroke}
               strokeWidth={ele.strokeWidth}
               fill="None"
@@ -72,10 +72,15 @@ const DataList = ({ data, zoomPercent }): JSX.Element[] =>
           );
         }
         if (element === 'curv') {
+          const { startX, startY, Cx1, Cy1, Cx2, Cy2, endX, endY } = ele;
+          const d = `M${startX * paperWidth},${startY * paperHeight}, C${Cx1 * paperWidth},${
+            Cy1 * paperHeight
+          } ${Cx2 * paperWidth},${Cy2 * paperHeight} ${endX * paperWidth},${endY * paperHeight}`;
+
           return (
             <path
               key={ele.key}
-              d={ele.d}
+              d={d}
               stroke={ele.stroke}
               strokeWidth={ele.strokeWidth}
               fill="None"
@@ -107,6 +112,7 @@ export default function SvgDrawer(): JSX.Element {
   return (
     <Container>
       <WrapPaperDiv
+        ref={svgRef}
         onMouseDown={startDrawing}
         onMouseUp={finishDrawing}
         onMouseLeave={finishDrawing}
@@ -119,9 +125,8 @@ export default function SvgDrawer(): JSX.Element {
           xmlns="http://www.w3.org/2000/svg"
           width={paperWidth}
           height={paperHeight}
-          ref={svgRef}
         >
-          {DataList({ data, zoomPercent })}
+          {DataList({ data, zoomPercent, paperWidth, paperHeight })}
         </svg>
       </WrapPaperDiv>
     </Container>

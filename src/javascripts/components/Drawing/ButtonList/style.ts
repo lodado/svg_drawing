@@ -9,12 +9,12 @@ const Container = styled.div`
   flex-wrap: wrap;
 
   min-height: 4.8rem;
-  min-width: 80vw;
+  min-width: 75vw;
   background-color: var(--MenuColor, #fff);
 
   justify-content: space-evenly;
   align-items: center;
-  margin: 1vh 8vw 2vh 8vw;
+  margin: 1vh 12.5vw 1vh 12.5vw;
 
   ${hoverMenuBar};
 `;

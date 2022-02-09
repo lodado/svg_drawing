@@ -9,14 +9,14 @@ export default function ZoomBox(): JSX.Element {
 
   const disPatch = useDispatch();
 
-  const zoom = `${zoomPercent}%`;
+  const zoom = ` ${zoomPercent}%`.slice(-4);
 
   return (
     <Container>
       <button type="button" onClick={() => disPatch(setShapeZoomPercent(zoomPercent + 10))}>
         {' + '}
       </button>
-      <span>{zoom}</span>
+      <pre>{zoom}</pre>
       <button type="button" onClick={() => disPatch(setShapeZoomPercent(zoomPercent - 10))}>
         {' - '}
       </button>

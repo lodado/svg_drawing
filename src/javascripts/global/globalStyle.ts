@@ -81,7 +81,7 @@ html {
 
   :root {
   ${Color}
-  
+  background-color:#F3F3F3;
   }
 
   button:hover {

@@ -50,6 +50,8 @@ export default function useShape() {
       return;
     }
 
+    const { width, height } = nativeEvent.target.getBoundingClientRect();
+
     offsetX = Number(offsetX);
     offsetY = Number(offsetY);
 
@@ -61,12 +63,14 @@ export default function useShape() {
       startY,
       debouncePixelColor,
       debouncePixelSize,
+      width,
+      height,
     });
     dispatch(setShapeData(attr));
     setPointer([undefined, undefined]);
   };
 
-  const finishDrawingByTouch = () => {
+  const finishDrawingByTouch = ({ nativeEvent }) => {
     const [startX, startY] = pointer;
     const [offsetX, offsetY] = endPointer;
 
@@ -79,6 +83,9 @@ export default function useShape() {
       return;
     }
 
+    const { target } = nativeEvent;
+    const { width, height } = target.parentNode.getBoundingClientRect();
+
     const attr = getAttr({
       shapeTag,
       offsetX,
@@ -87,6 +94,8 @@ export default function useShape() {
       startY,
       debouncePixelColor,
       debouncePixelSize,
+      width,
+      height,
     });
 
     dispatch(setShapeData(attr));

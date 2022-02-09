@@ -6,6 +6,8 @@ export function getAttr({
   startY,
   debouncePixelColor,
   debouncePixelSize,
+  width,
+  height,
 }) {
   const obj = {
     element: shapeTag,
@@ -14,48 +16,55 @@ export function getAttr({
     strokeWidth: debouncePixelSize,
   };
 
-  const [Cx1, Cy1] = [startX, offsetY];
-  const [Cx2, Cy2] = [offsetX, startY];
+  const [Cx1, Cy1] = [startX / width, offsetY / height];
+  const [Cx2, Cy2] = [offsetX / width, startY / height];
 
   switch (shapeTag) {
     case 'line':
       return {
         ...obj,
-        x1: startX,
-        y1: startY,
-        x2: offsetX,
-        y2: offsetY,
+        x1: startX / width,
+        y1: startY / height,
+        x2: offsetX / width,
+        y2: offsetY / height,
       };
 
     case 'circle':
       return {
         ...obj,
-        x: (offsetX + startX) / 2,
-        y: (offsetY + startY) / 2,
+        x: (offsetX + startX) / (2 * width),
+        y: (offsetY + startY) / (2 * height),
         r: Math.sqrt((offsetX - startX) ** 2 + (offsetY - startY) ** 2) / 2,
       };
     case 'rect':
       return {
         ...obj,
-        x: Math.min(offsetX, startX),
-        y: Math.min(offsetY, startY),
-        width: Math.abs(offsetX - startX),
-        height: Math.abs(offsetY - startY),
+        x: Math.min(offsetX, startX) / width,
+        y: Math.min(offsetY, startY) / height,
+        width: Math.abs(offsetX - startX) / width,
+        height: Math.abs(offsetY - startY) / height,
       };
 
     case 'ellipse':
       return {
         ...obj,
-        cx: (offsetX + startX) / 2,
-        cy: (offsetY + startY) / 2,
-        rx: Math.abs(offsetX - startX) / 2,
-        ry: Math.abs(offsetY - startY) / 2,
+        cx: (offsetX + startX) / (2 * width),
+        cy: (offsetY + startY) / (2 * height),
+        rx: Math.abs(offsetX - startX) / (2 * width),
+        ry: Math.abs(offsetY - startY) / (2 * height),
       };
 
     case 'curv':
       return {
         ...obj,
-        d: `M${startX},${startY}, C${Cx1},${Cy1} ${Cx2},${Cy2} ${offsetX},${offsetY}`,
+        startX: startX / width,
+        startY: startY / height,
+        Cx1,
+        Cy1,
+        Cx2,
+        Cy2,
+        endX: offsetX / width,
+        endY: offsetY / height,
       };
 
     default:
