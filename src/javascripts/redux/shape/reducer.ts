@@ -49,9 +49,8 @@ function getVaildShapeZoomPercent({ state, payload }) {
 function setUndo({ state }) {
   const { data, undoArray } = state;
 
-  if (data.length === 0) return state;
+  if (data.length === 0 || undoArray.length >= UNDO_LIMIT) return state;
 
-  if (undoArray.length >= UNDO_LIMIT) undoArray.shift();
   const newData = data;
   const newUndoArray = undoArray.concat(newData.pop());
 
@@ -84,6 +83,9 @@ export default function shapeReducer(state = initState, action: ShapeActionType)
     case SHAPE_ZOOM:
       return getVaildShapeZoomPercent({ state, payload });
     case SHAPE_DATA:
+      if (state.undoArray.length > 0) {
+        state.undoArray.shift();
+      }
       return { ...state, data: state.data.concat(payload.data) };
     case UNDO_DATA:
       return setUndo({ state });
