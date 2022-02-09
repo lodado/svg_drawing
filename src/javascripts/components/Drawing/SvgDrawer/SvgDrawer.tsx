@@ -1,5 +1,5 @@
 /* eslint-disable implicit-arrow-linebreak */
-import React, { useMemo, useRef } from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootStoreType } from '@Redux/index';
@@ -12,7 +12,9 @@ const DataList = ({ data, zoomPercent }): JSX.Element[] =>
   useMemo(
     () =>
       data.map((ele) => {
-        if (ele.element === 'line') {
+        const { element } = ele;
+
+        if (element === 'line') {
           return (
             <line
               key={ele.key}
@@ -26,7 +28,7 @@ const DataList = ({ data, zoomPercent }): JSX.Element[] =>
           );
         }
 
-        if (ele.element === 'circle') {
+        if (element === 'circle') {
           return (
             <circle
               key={ele.key}
@@ -39,6 +41,37 @@ const DataList = ({ data, zoomPercent }): JSX.Element[] =>
             />
           );
         }
+
+        if (element === 'rect') {
+          return (
+            <rect
+              key={ele.key}
+              x={ele.x}
+              y={ele.y}
+              width={ele.width}
+              height={ele.height}
+              stroke={ele.stroke}
+              strokeWidth={ele.strokeWidth}
+              fillOpacity="0"
+            />
+          );
+        }
+
+        if (element === 'ellipse') {
+          return (
+            <ellipse
+              key={ele.key}
+              cx={ele.cx}
+              cy={ele.cy}
+              rx={ele.rx}
+              ry={ele.ry}
+              stroke={ele.stroke}
+              strokeWidth={ele.strokeWidth}
+              fillOpacity="0"
+            />
+          );
+        }
+
         return '';
       }),
     [zoomPercent, data],

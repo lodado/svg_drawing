@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootStoreType } from '@Redux/index';
 
@@ -36,6 +36,23 @@ function getAttr({
         x: (offsetX + startX) / 2,
         y: (offsetY + startY) / 2,
         r: Math.sqrt((offsetX - startX) ** 2 + (offsetY - startY) ** 2) / 2,
+      };
+    case 'rect':
+      return {
+        ...obj,
+        x: Math.min(offsetX, startX),
+        y: Math.min(offsetY, startY),
+        width: Math.abs(offsetX - startX),
+        height: Math.abs(offsetY - startY),
+      };
+
+    case 'ellipse':
+      return {
+        ...obj,
+        cx: (offsetX + startX) / 2,
+        cy: (offsetY + startY) / 2,
+        rx: Math.abs(offsetX - startX) / 2,
+        ry: Math.abs(offsetY - startY) / 2,
       };
 
     default:
@@ -102,10 +119,9 @@ export default function useShape() {
 
     setData(data.concat(attr));
     setPointer([undefined, undefined]);
-    setEndPointer([undefined, undefined]);
   };
 
-  const finishDrawingByTouch = ({ nativeEvent }) => {
+  const finishDrawingByTouch = () => {
     const [startX, startY] = pointer;
     const [offsetX, offsetY] = endPointer;
 

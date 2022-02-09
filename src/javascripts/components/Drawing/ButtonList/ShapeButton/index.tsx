@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { RootStoreType } from '@Redux/index';
 import { setShapeTag } from '@Redux/shape/action';
+import { ShapeTagType } from '@Global/enum';
 import StyledDiv from './style';
 
 interface Props {
-  text: string;
+  text: ShapeTagType;
 }
 
 export default function ShapeButton({ text }: Props): JSX.Element {
