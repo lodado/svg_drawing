@@ -34,7 +34,10 @@ export function getAttr({
         ...obj,
         x: (offsetX + startX) / (2 * width),
         y: (offsetY + startY) / (2 * height),
-        r: Math.sqrt((offsetX - startX) ** 2 + (offsetY - startY) ** 2) / 2,
+        offsetX: offsetX / width,
+        startX: startX / width,
+        offsetY: offsetY / height,
+        startY: offsetY / height,
       };
     case 'rect':
       return {

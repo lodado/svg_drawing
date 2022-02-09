@@ -29,12 +29,17 @@ const DataList = ({ data, zoomPercent, paperWidth, paperHeight }): JSX.Element[]
         }
 
         if (element === 'circle') {
+          const { startX, offsetX, startY, offsetY } = ele;
+
+          const [x1, y1] = [startX * paperWidth, startY * paperHeight];
+          const [x2, y2] = [offsetX * paperWidth, offsetY * paperHeight];
+
           return (
             <circle
               key={ele.key}
               cx={ele.x * paperWidth}
               cy={ele.y * paperHeight}
-              r={ele.r * (zoomPercent / 100)}
+              r={Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2) / 2}
               stroke={ele.stroke}
               strokeWidth={ele.strokeWidth}
               fill="None"
