@@ -83,6 +83,20 @@ const DataList = ({ data, zoomPercent }): JSX.Element[] =>
           );
         }
 
+        if (element === 'img') {
+          return (
+            <img
+              x="100"
+              y="200"
+              width={500}
+              height={500}
+              key={ele.key}
+              src={ele.src}
+              alt="userSVG"
+            />
+          );
+        }
+
         return '';
       }),
     [zoomPercent, data.length],
@@ -115,7 +129,13 @@ export default function SvgDrawer(): JSX.Element {
         onTouchMove={moveDrawingByTouch}
         onTouchEnd={finishDrawingByTouch}
       >
-        <svg width={paperWidth} height={paperHeight} ref={svgRef}>
+        <svg
+          id="svgDrawer"
+          xmlns="http://www.w3.org/2000/svg"
+          width={paperWidth}
+          height={paperHeight}
+          ref={svgRef}
+        >
           {DataList({ data, zoomPercent })}
         </svg>
       </WrapPaperDiv>

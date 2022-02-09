@@ -9,6 +9,7 @@ import {
   SHAPE_DATA,
   UNDO_DATA,
   REDO_DATA,
+  CLEAR_DATA,
 } from './action';
 
 type Shape = any;
@@ -23,7 +24,15 @@ export interface ShapePayloadType {
 }
 
 export interface ShapeActionType {
-  type: PIXEL_SIZE | PIXEL_COLOR | PIXEL_MODAL | SHAPE_TAG | SHAPE_ZOOM | SHAPE_DATA | UNDO_DATA;
+  type:
+    | CLEAR_DATA
+    | PIXEL_SIZE
+    | PIXEL_COLOR
+    | PIXEL_MODAL
+    | SHAPE_TAG
+    | SHAPE_ZOOM
+    | SHAPE_DATA
+    | UNDO_DATA;
   payload?: ShapePayloadType;
 }
 
@@ -48,7 +57,6 @@ function getVaildShapeZoomPercent({ state, payload }) {
 
 function setUndo({ state }) {
   const { data, undoArray } = state;
-
   if (data.length === 0 || undoArray.length >= UNDO_LIMIT) return state;
 
   const newData = data;
@@ -87,6 +95,8 @@ export default function shapeReducer(state = initState, action: ShapeActionType)
         state.undoArray.shift();
       }
       return { ...state, data: state.data.concat(payload.data) };
+    case CLEAR_DATA:
+      return { ...state, data: [], undoArray: [] };
     case UNDO_DATA:
       return setUndo({ state });
     case REDO_DATA:
