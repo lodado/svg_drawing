@@ -8,6 +8,6 @@
 
 ## 배포 
 
-https://lodado.github.io/
+https://lodadoclone.github.io/
 
 (아직 다 완성되진 않았습니다) 
