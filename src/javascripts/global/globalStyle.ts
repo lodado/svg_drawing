@@ -6,7 +6,7 @@ const Body = css`
 
 const Color = css`
   --DarkGrey: rgba(0, 0, 0, 0.25);
-  --ShallowGrey: rgba(0, 0, 0, 0.15);
+  --WhiteGrey: rgba(0, 0, 0, 0.15);
   --MenuColor: #fff;
   --MarineBlue: #0072ff;
 `;
@@ -56,6 +56,7 @@ footer, header, hgroup, menu, nav, section {
 body {
     line-height: 1;
   ${Body}
+ 
 }
 ol, ul {
     list-style: none;

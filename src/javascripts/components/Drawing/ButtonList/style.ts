@@ -8,8 +8,11 @@ const Container = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
 
-  min-height: 4.8rem;
-  min-width: 75vw;
+  min-height: 60px;
+  height: 4.8rem;
+
+  width: 75vw;
+
   background-color: var(--MenuColor, #fff);
 
   justify-content: space-evenly;

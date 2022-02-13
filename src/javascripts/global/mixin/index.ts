@@ -5,7 +5,7 @@ export const GreyBackgroundShadow = css`
   border-left: 0.05rem solid rgba(0, 0, 0, 0.05);
   border-radius: 0% 0% 0% 0% / 0% 0% 0% 0%;
 
-  box-shadow: 0.3rem 0.3rem var(--ShallowGrey, rgba(0, 0, 0, 0.15));
+  box-shadow: 0.3rem 0.3rem var(--WhiteGrey, rgba(0, 0, 0, 0.15));
 `;
 
 export const hoverMenuBar = css`

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootStoreType } from '@Redux/index';
 import { setShapeData } from '@Redux/shape/action';
@@ -6,10 +6,11 @@ import { getAttr } from '@Global/util';
 import useDebounce from './useDebounce';
 
 export default function useShape() {
+  const svgDrawerRef = useRef(undefined);
   const [pointer, setPointer] = useState([undefined, undefined]);
   const [endPointer, setEndPointer] = useState([undefined, undefined]);
 
-  const { shapeTag, zoomPercent, pixelSize, pixelColor } = useSelector(
+  const { shapeTag, pixelSize, pixelColor } = useSelector(
     (state: RootStoreType) => state.shapeReducer,
   );
   const dispatch = useDispatch();
@@ -24,8 +25,8 @@ export default function useShape() {
   };
 
   const startDrawingByTouch = ({ nativeEvent }) => {
-    const { target, touches } = nativeEvent;
-    const bcr = target.parentNode.getBoundingClientRect();
+    const { touches } = nativeEvent;
+    const bcr = svgDrawerRef.current.getBoundingClientRect();
     const startX = Math.abs(touches[0].pageX - bcr.left);
     const startY = Math.abs(touches[0].pageY - bcr.top);
 
@@ -33,8 +34,9 @@ export default function useShape() {
   };
 
   const moveDrawingByTouch = ({ nativeEvent }) => {
-    const { target, touches } = nativeEvent;
-    const bcr = target.parentNode.getBoundingClientRect();
+    const { touches } = nativeEvent;
+
+    const bcr = svgDrawerRef.current.getBoundingClientRect();
 
     const moveX = Math.abs(touches[0].pageX - bcr.left);
     const moveY = Math.abs(touches[0].pageY - bcr.top);
@@ -46,11 +48,16 @@ export default function useShape() {
     let { offsetX, offsetY } = nativeEvent;
     const [startX, startY] = pointer;
 
-    if (startX === undefined || startY === undefined) {
+    if (
+      startX === undefined ||
+      startY === undefined ||
+      offsetX === undefined ||
+      offsetY === undefined
+    ) {
       return;
     }
 
-    const { width, height } = nativeEvent.target.getBoundingClientRect();
+    const { width, height } = svgDrawerRef.current.getBoundingClientRect();
 
     offsetX = Number(offsetX);
     offsetY = Number(offsetY);
@@ -68,6 +75,7 @@ export default function useShape() {
     });
     dispatch(setShapeData(attr));
     setPointer([undefined, undefined]);
+    setEndPointer([undefined, undefined]);
   };
 
   const finishDrawingByTouch = ({ nativeEvent }) => {
@@ -104,6 +112,7 @@ export default function useShape() {
   };
 
   return {
+    svgDrawerRef,
     startDrawing,
     finishDrawing,
     startDrawingByTouch,

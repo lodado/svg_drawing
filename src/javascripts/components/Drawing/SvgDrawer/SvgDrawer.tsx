@@ -1,5 +1,5 @@
 /* eslint-disable implicit-arrow-linebreak */
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { RootStoreType } from '@Redux/index';
@@ -98,8 +98,8 @@ const DataList = ({ data, zoomPercent, paperWidth, paperHeight }): JSX.Element[]
   );
 
 export default function SvgDrawer(): JSX.Element {
-  const svgRef = useRef(undefined);
   const {
+    svgDrawerRef,
     startDrawing,
     finishDrawing,
     startDrawingByTouch,
@@ -117,7 +117,6 @@ export default function SvgDrawer(): JSX.Element {
   return (
     <Container>
       <WrapPaperDiv
-        ref={svgRef}
         onMouseDown={startDrawing}
         onMouseUp={finishDrawing}
         onMouseLeave={finishDrawing}
@@ -127,6 +126,7 @@ export default function SvgDrawer(): JSX.Element {
       >
         <svg
           id="svgDrawer"
+          ref={svgDrawerRef}
           xmlns="http://www.w3.org/2000/svg"
           width={paperWidth}
           height={paperHeight}
